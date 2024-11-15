@@ -1,0 +1,68 @@
+# Copyright 2024 Circle Internet Group, Inc. All rights reserved.
+#
+# SPDX-License-Identifier: Apache-2.0
+#
+# Licensed under the Apache License, Version 2.0 (the "License");
+# you may not use this file except in compliance with the License.
+# You may obtain a copy of the License at
+#
+#     http://www.apache.org/licenses/LICENSE-2.0
+#
+# Unless required by applicable law or agreed to in writing, software
+# distributed under the License is distributed on an "AS IS" BASIS,
+# WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+# See the License for the specific language governing permissions and
+# limitations under the License.
+
+name: CI
+on:
+  push:
+    branches: [master]
+  pull_request:
+
+permissions:
+  contents: write
+
+jobs:
+  run_ci_tests:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Check out repository code
+        uses: actions/checkout@v4
+
+      - name: Install Node
+        uses: actions/setup-node@v4
+        with:
+          node-version: "20.14.0"
+
+      - name: Setup CI Environment
+        run: make setup
+
+      - name: Run static checks
+        run: make static-checks
+
+      - name: Run move tests
+        run: make test
+
+      - name: Run move prover
+        run: |
+          export BOOGIE_EXE=/home/runner/.local/bin/boogie
+          export CVC5_EXE=/home/runner/.local/bin/cvc5
+          export Z3_EXE=/home/runner/.local/bin/z3
+          make prove
+
+      - name: Start network
+        run: make start-network
+
+      - name: Run Typescript tests
+        run: yarn test
+
+  scan:
+    if: github.event_name == 'pull_request'
+    uses: circlefin/circle-public-github-workflows/.github/workflows/pr-scan.yaml@v1
+    with:
+      allow-reciprocal-licenses: false
+
+  release-sbom:
+    if: github.event_name == 'push'
+    uses: circlefin/circle-public-github-workflows/.github/workflows/attach-release-assets.yaml@v1

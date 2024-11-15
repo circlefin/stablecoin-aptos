@@ -1,0 +1,21 @@
+{
+  "name": "USDC",
+  "symbol": "USDC",
+  "decimals": 6,
+  "iconUri": "https://circle.com/usdc-icon",
+  "projectUri": "https://circle.com/usdc",
+
+  "admin": "",
+  "blocklister": "",
+  "masterMinter": "",
+  "metadataUpdater": "",
+  "owner": "",
+  "pauser": "",
+
+  "controllers": {
+    "_controllerAddress": "_minterAddress"
+  },
+  "minters": {
+    "_minterAddress": "_mintAllowance_in_subunits"
+  }
+}

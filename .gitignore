@@ -1,0 +1,17 @@
+.aptos/
+gas-profiling/
+*.log
+bin/
+build/
+node_modules/
+logs/
+**/build-output*
+**/.coverage_map.mvcov
+**/.trace
+**/boogie.bpl
+scripts/typescript/resources/**
+!scripts/typescript/resources/default_token.json
+!scripts/typescript/resources/*.template.json
+
+# Intellij
+.idea

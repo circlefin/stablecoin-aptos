@@ -1,0 +1,42 @@
+{
+  "aptosExtensionsPackageId": "",
+  "stablecoinPackageId": "",
+  "expectedStates": {
+    "aptosExtensionsPackage": {
+      "upgradeNumber": 0,
+      "upgradePolicy": "immutable",
+      "sourceCodeExists": false
+    },
+    "stablecoinPackage": {
+      "upgradeNumber": 0,
+      "upgradePolicy": "compatible",
+      "sourceCodeExists": false
+    },
+
+    "name": "USDC",
+    "symbol": "USDC",
+    "decimals": 6,
+    "iconUri": "https://circle.com/usdc-icon",
+    "projectUri": "https://circle.com/usdc",
+    "paused": false,
+    "initializedVersion": 1,
+    "totalSupply": "0",
+
+    "admin": "",
+    "blocklister": "",
+    "masterMinter": "",
+    "metadataUpdater": "",
+    "owner": "",
+    "pauser": "",
+    "pendingOwner": "",
+    "pendingAdmin": "",
+
+    "controllers": {
+      "_controllerAddress": "_minterAddress"
+    },
+    "minters": {
+      "_minterAddress": "_mintAllowance_in_subunits"
+    },
+    "blocklist": ["_blocklistedAddress"]
+  }
+}
