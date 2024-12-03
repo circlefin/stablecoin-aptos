@@ -19,7 +19,7 @@
 echo ">> Setting up environment"
 
 # ==== Aptos installation ====
-APTOS_CLI_VERSION="4.2.6"
+APTOS_CLI_VERSION=4.2.6 # github-releases:aptos-labs extractVersion=^aptos-cli-v(?<version>.*)$
 
 if [ "$CI" == true ]; then
   curl -sSfL -o /tmp/aptos.zip "https://github.com/aptos-labs/aptos-core/releases/download/aptos-cli-v$APTOS_CLI_VERSION/aptos-cli-$APTOS_CLI_VERSION-Ubuntu-22.04-x86_64.zip"
