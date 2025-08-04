@@ -5,7 +5,7 @@ upgrade_policy = "compatible"
 
 [dependencies.AptosFramework]
 git = "https://github.com/aptos-labs/aptos-core.git"
-rev = "mainnet"
+rev = "1381c93fd5a656f16fb326d4ffe371947554a330"
 subdir = "aptos-move/framework/aptos-framework"
 
 [dependencies.AptosExtensions]

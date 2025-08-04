@@ -17,7 +17,7 @@
  */
 
 import { strict as assert } from "assert";
-import { Ed25519Account } from "@aptos-labs/ts-sdk";
+import { Ed25519Account, MultiKey, MultiKeyAccount } from "@aptos-labs/ts-sdk";
 import { generateKeypair } from "../../scripts/typescript/generateKeypair";
 import {
   checkSourceCodeExistence,
@@ -50,4 +50,19 @@ export async function generateKeypairs<N extends number>(
     Array.from({ length: n }).map(() => generateKeypair({ prefund }))
   );
   return keypairs as RepeatTuple<Ed25519Account, N>;
+}
+
+export async function generateKOfNMultiKeyAccount(
+  k: number,
+  n: number
+): Promise<MultiKeyAccount> {
+  const keypairs = (await generateKeypairs(n, false)) as Array<Ed25519Account>;
+
+  return new MultiKeyAccount({
+    multiKey: new MultiKey({
+      publicKeys: keypairs.map((keypair) => keypair.publicKey),
+      signaturesRequired: k
+    }),
+    signers: keypairs
+  });
 }

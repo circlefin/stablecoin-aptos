@@ -2,10 +2,12 @@
 # yarn lockfile v1
 
 
-"@aptos-labs/aptos-cli@^0.2.0":
-  version "0.2.0"
-  resolved "https://registry.npmjs.org/@aptos-labs/aptos-cli/-/aptos-cli-0.2.0.tgz"
-  integrity sha512-6kljJFRsTLXCvgkNhBoOLhVyo7rmih+8+XAtdeciIXkZYwzwVS3TFPLMqBUO2HcY6gYtQQRmTG52R5ihyi/bXA==
+"@aptos-labs/aptos-cli@^1.0.2":
+  version "1.0.2"
+  resolved "https://registry.yarnpkg.com/@aptos-labs/aptos-cli/-/aptos-cli-1.0.2.tgz#91bd1368cf808f715d102822b7d4032388cdad79"
+  integrity sha512-PYPsd0Kk3ynkxNfe3S4fanI3DiUICCoh4ibQderbvjPFL5A0oK6F4lPEO2t0MDsQySTk2t4vh99Xjy6Bd9y+aQ==
+  dependencies:
+    commander "^12.1.0"
 
 "@aptos-labs/aptos-client@^0.1.1":
   version "0.1.1"
@@ -15,12 +17,12 @@
     axios "1.7.4"
     got "^11.8.6"
 
-"@aptos-labs/ts-sdk@1.29.1":
-  version "1.29.1"
-  resolved "https://registry.npmjs.org/@aptos-labs/ts-sdk/-/ts-sdk-1.29.1.tgz"
-  integrity sha512-cQsXBTbSG5XzrulzEgSMc7BPUl6jw257b248nBDYkUv6tMHkWlxuFKF6F2l+6Z8/buNIQKNPZnaZKT26DjVKug==
+"@aptos-labs/ts-sdk@1.33.0":
+  version "1.33.0"
+  resolved "https://registry.yarnpkg.com/@aptos-labs/ts-sdk/-/ts-sdk-1.33.0.tgz#4da4501d04ad38381630b06d7d8a29bc4b3f1855"
+  integrity sha512-svdlPH5r2dlSue2D9WXaaTslsmX18WLytAho6IRZJxQjEssglk64I6c1G9S8BTjRQj/ug6ahTwp6lx3eWuyd8Q==
   dependencies:
-    "@aptos-labs/aptos-cli" "^0.2.0"
+    "@aptos-labs/aptos-cli" "^1.0.2"
     "@aptos-labs/aptos-client" "^0.1.1"
     "@noble/curves" "^1.4.0"
     "@noble/hashes" "^1.4.0"
@@ -111,9 +113,9 @@
   integrity sha512-BsWiH1yFGjXXS2yvrf5LyuoSIIbPrGUWob917o+BTKuZ7qJdxX8aJLRxs1fS9n6r7vESrq1OUqb68dANcFXuQQ==
 
 "@eslint/plugin-kit@^0.2.0":
-  version "0.2.2"
-  resolved "https://registry.npmjs.org/@eslint/plugin-kit/-/plugin-kit-0.2.2.tgz"
-  integrity sha512-CXtq5nR4Su+2I47WPOlWud98Y5Lv8Kyxp2ukhgFx/eW6Blm18VXJO5WuQylPugRo8nbluoi6GvvxBLqHcvqUUw==
+  version "0.2.3"
+  resolved "https://registry.yarnpkg.com/@eslint/plugin-kit/-/plugin-kit-0.2.3.tgz#812980a6a41ecf3a8341719f92a6d1e784a2e0e8"
+  integrity sha512-2b/g5hRmpbb1o4GnTZax9N9m0FXzz9OV42ZzI4rDDMDuHUqigAiQCEWChBWCY4ztAGVRjoWT19v0yMmc5/L5kA==
   dependencies:
     levn "^0.4.1"
 
@@ -759,9 +761,9 @@ combined-stream@^1.0.8:
   dependencies:
     delayed-stream "~1.0.0"
 
-commander@12.1.0:
+commander@12.1.0, commander@^12.1.0:
   version "12.1.0"
-  resolved "https://registry.npmjs.org/commander/-/commander-12.1.0.tgz"
+  resolved "https://registry.yarnpkg.com/commander/-/commander-12.1.0.tgz#01423b36f501259fdaac4d0e4d60c96c991585d3"
   integrity sha512-Vw8qHK3bZM9y/P10u3Vib8o/DdkvA2OtPtZvD871QKjy74Wj1WSKFILMPRPSdUSx5RFK1arlJzEtA4PkFgnbuA==
 
 common-tags@^1.4.0:
@@ -780,9 +782,9 @@ create-require@^1.1.0:
   integrity sha512-dcKFX3jn0MpIaXjisoRvexIJVEKzaq7z2rZKxf+MSr9TkdmHmsU4m2lcLojrj/FHl8mk5VxMmYA+ftRkP/3oKQ==
 
 cross-spawn@^7.0.2:
-  version "7.0.3"
-  resolved "https://registry.npmjs.org/cross-spawn/-/cross-spawn-7.0.3.tgz"
-  integrity sha512-iRDPJKUPVEND7dHPO8rkbOnPpyDygcDFtWjpeWNCgy8WP2rXcxXL8TskReQl6OrB2G7+UJrags1q15Fudc7G6w==
+  version "7.0.6"
+  resolved "https://registry.yarnpkg.com/cross-spawn/-/cross-spawn-7.0.6.tgz#8a58fe78f00dcd70c370451759dfbfaf03e8ee9f"
+  integrity sha512-uV2QOWP2nWzsy2aMp8aRibhi9dlzF5Hgh5SHaB9OiTGEyDTiJJyx0uy51QXdyWbtAHNua4XJzUKca3OzKUd3vA==
   dependencies:
     path-key "^3.1.0"
     shebang-command "^2.0.0"

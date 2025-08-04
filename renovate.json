@@ -1,0 +1,17 @@
+{
+  "$schema": "https://docs.renovatebot.com/renovate-schema.json",
+  "extends": [
+    "github>circlefin/renovate-config",
+    "github>circlefin/renovate-config:versions.sh"
+  ],
+  "regexManagers": [
+    {
+      "fileMatch": ["scripts/shell/setup.sh"],
+      "matchStrings": [
+        "export (?<depName>.*?)_VERSION=\"?(?<currentValue>[^\"\\t\\n\\r]*)\"? +# (?<datasource>.*?):(?<packageName>[^\\s]*)( versioning=(?<versioning>[^\\s]+))?( extractVersion=(?<extractVersion>[^\\s]+))?",
+        "export (?<depName>.*?)_TAG=\"?(?<currentValue>[^\"\\t\\n\\r]*)\"? +# (?<datasource>.*?):(?<packageName>[^\\s]*)( versioning=(?<versioning>[^\\s]+))?( extractVersion=(?<extractVersion>[^\\s]+))?"
+      ],
+      "depNameTemplate": "{{{ replace '_' '-' (lowercase depName) }}}"
+    }
+  ]
+}

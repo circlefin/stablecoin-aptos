@@ -24,7 +24,10 @@ import calculateDeploymentAddresses from "./calculateDeploymentAddresses";
 import changeAdmin from "./changeAdmin";
 import configureController from "./configureController";
 import configureMinter from "./configureMinter";
+import decodeTransaction from "./decodeTransaction";
+import deploy from "./deploy";
 import deployAndInitializeToken from "./deployAndInitializeToken";
+import executeTransaction from "./executeTransaction";
 import generateKeypair from "./generateKeypair";
 import removeController from "./removeController";
 import removeMinter from "./removeMinter";
@@ -47,7 +50,10 @@ program
   .addCommand(changeAdmin)
   .addCommand(configureController)
   .addCommand(configureMinter)
+  .addCommand(decodeTransaction)
+  .addCommand(deploy)
   .addCommand(deployAndInitializeToken)
+  .addCommand(executeTransaction)
   .addCommand(generateKeypair)
   .addCommand(removeController)
   .addCommand(removeMinter)

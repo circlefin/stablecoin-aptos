@@ -16,34 +16,50 @@
 # See the License for the specific language governing permissions and
 # limitations under the License.
 
-echo ">> Setting up environment"
+set -e
 
-# ==== Aptos installation ====
-APTOS_CLI_VERSION="4.2.6"
-
-if [ "$CI" == true ]; then
-  curl -sSfL -o /tmp/aptos.zip "https://github.com/aptos-labs/aptos-core/releases/download/aptos-cli-v$APTOS_CLI_VERSION/aptos-cli-$APTOS_CLI_VERSION-Ubuntu-22.04-x86_64.zip"
-  sudo unzip /tmp/aptos.zip -d /usr/local/bin
-  sudo chmod +x /usr/local/bin/*
+if [[ "$CI" == true ]]
+then
+  OS="Ubuntu-22.04-x86_64"
 else
-  if [ "$(brew ls --versions aptos)" != "aptos $APTOS_CLI_VERSION" ]; then
-    brew uninstall --force aptos && \
-    # aptos 4.2.6's formula
-    curl -s -o aptos.rb https://raw.githubusercontent.com/Homebrew/homebrew-core/ef458cb0a2574eb7d451090cbedc3942b77a7284/Formula/a/aptos.rb
-    brew install --formula aptos.rb
-    brew pin aptos
-    rm aptos.rb
-  fi
+  OS="macOS-arm64"
 fi
 
-# ==== Movefmt & Move prover installation ====
-if [ -z $APTOS_BIN ]
+echo ">> Setting up environment"
+
+
+# ==== Aptos installation ====
+APTOS_CLI_VERSION="7.5.0"
+APTOS_BIN="${APTOS_BIN:-$HOME/.aptos/bin}"
+
+if ! command -v aptos &> /dev/null || ! aptos -V | grep -q "aptos $APTOS_CLI_VERSION"
 then
-  aptos update movefmt
-  aptos update prover-dependencies
-else
-  aptos update movefmt --install-dir $APTOS_BIN
-  aptos update prover-dependencies --install-dir $APTOS_BIN
+  echo "Installing Aptos binary from Github..."
+  echo ">> Version: '$APTOS_CLI_VERSION'"
+  echo ">> OS: '$OS'"
+
+  # Download and extract Aptos binaries.
+  rm -rf "$APTOS_BIN"
+  mkdir -p "$APTOS_BIN"
+  curl -L -o "$APTOS_BIN/aptos-v$APTOS_CLI_VERSION.zip" "https://github.com/aptos-labs/aptos-core/releases/download/aptos-cli-v$APTOS_CLI_VERSION/aptos-cli-$APTOS_CLI_VERSION-$OS.zip"
+  unzip -o "$APTOS_BIN/aptos-v$APTOS_CLI_VERSION.zip" -d "$APTOS_BIN"
+  rm "$APTOS_BIN/aptos-v$APTOS_CLI_VERSION.zip"
+
+  # Sanity check that the Aptos binary was installed correctly
+  echo "Checking aptos installation..."
+  if ! "$APTOS_BIN/aptos" -V | grep -q "aptos $APTOS_CLI_VERSION"
+  then
+    echo "Aptos binary was not installed correctly"
+    exit 1
+  fi
+
+  if [[ "$CI" == true ]]
+  then
+    echo "$APTOS_BIN" >> $GITHUB_PATH
+  else
+    echo "    Aptos binary installed successfully. Run the following command to add 'aptos' to your shell"
+    echo "    echo 'export PATH=\"$APTOS_BIN:\$PATH\"' >> ~/.zshrc"
+  fi
 fi
 
 

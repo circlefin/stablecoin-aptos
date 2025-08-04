@@ -131,7 +131,8 @@ export function getEventByType(
  * Reformat address to ensure it conforms to AIP-40.
  */
 export function normalizeAddress(address: string): string {
-  return AccountAddress.from(address).toString();
+  const paddedAddress = `0x${address.replace("0x", "").padStart(64, "0")}`;
+  return AccountAddress.from(paddedAddress).toString();
 }
 
 /**
@@ -201,8 +202,9 @@ export function yupAptosAddress() {
 
 export function isAptosAddress(value: any) {
   return (
-    typeof value === "string" &&
-    AccountAddress.isValid({ input: value, strict: true }).valid
+    !value ||
+    (typeof value === "string" &&
+      AccountAddress.isValid({ input: value, strict: true }).valid)
   );
 }
 

@@ -17,7 +17,6 @@
  */
 import { Account, Ed25519PrivateKey } from "@aptos-labs/ts-sdk";
 import { program } from "commander";
-import { inspect } from "util";
 import { AptosExtensionsPackage } from "./packages/aptosExtensionsPackage";
 import {
   getAptosClient,
@@ -73,10 +72,7 @@ export async function upgradeStablecoinPackage({
   console.log(`Admin account: ${admin.accountAddress}`);
 
   const payload = readPublishPayload(payloadFilePath);
-  console.log(
-    "Updating package using payload",
-    inspect(payload, false, 8, true)
-  );
+  console.log(`Updating package using payload from ${payloadFilePath}`);
 
   if (!(await waitForUserConfirmation())) {
     process.exit(1);

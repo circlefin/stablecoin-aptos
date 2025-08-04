@@ -3,12 +3,12 @@
 # === Move compiler settings ===
 
 # Refer to https://github.com/aptos-labs/aptos-core/blob/687937182b30f32895d13e4384a96e03f569468c/third_party/move/move-model/src/metadata.rs#L80
-compiler_version = 1
+compiler_version = 2
 
 # Refer to https://github.com/aptos-labs/aptos-core/blob/687937182b30f32895d13e4384a96e03f569468c/third_party/move/move-model/src/metadata.rs#L179
 # NOTE: The bytecode_version used during compilation is auto-inferred from this setting. Refer to https://github.com/aptos-labs/aptos-core/blob/687937182b30f32895d13e4384a96e03f569468c/third_party/move/move-model/src/metadata.rs#L235-L241
 # for more information.
-language_version = 1
+language_version = 2
 
 setup:
 	@bash scripts/shell/setup.sh
