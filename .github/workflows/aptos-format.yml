@@ -1,0 +1,20 @@
+```yaml
+name: Aptos format check
+
+on:
+  pull_request:
+    paths:
+      - "**/*.move"
+      - ".github/workflows/aptos-format.yml"
+
+jobs:
+  format:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - name: Install Aptos CLI
+        run: |
+          curl -fsSL "https://aptos.dev/scripts/install_cli.py" | python3
+      - name: Format check
+        run: |
+          aptos move fmt --check
