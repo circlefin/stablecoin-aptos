@@ -21,7 +21,7 @@ import { strict as assert } from "assert";
 import sinon, { SinonStub } from "sinon";
 import { updateBlocklister } from "../../scripts/typescript/updateBlocklister";
 import * as stablecoinPackageModule from "../../scripts/typescript/packages/stablecoinPackage";
-import { getAptosClient } from "../../scripts/typescript/utils";
+import { matchAptosClient } from "./testUtils";
 
 describe("updateBlocklister", () => {
   let stablecoinPackageStub: SinonStub;
@@ -61,9 +61,9 @@ describe("updateBlocklister", () => {
 
     // Ensure that the request will be made to the correct package.
     sinon.assert.calledWithNew(stablecoinPackageStub);
-    sinon.assert.calledWithExactly(
+    sinon.assert.calledWithMatch(
       stablecoinPackageStub,
-      getAptosClient(rpcUrl),
+      matchAptosClient(rpcUrl),
       stablecoinPackageId
     );
 

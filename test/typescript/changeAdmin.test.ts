@@ -21,7 +21,7 @@ import { strict as assert } from "assert";
 import sinon, { SinonStub } from "sinon";
 import { changeAdmin } from "../../scripts/typescript/changeAdmin";
 import * as aptosExtensionsPackageModule from "../../scripts/typescript/packages/aptosExtensionsPackage";
-import { getAptosClient } from "../../scripts/typescript/utils";
+import { matchAptosClient } from "./testUtils";
 
 describe("changeAdmin", () => {
   let aptosExtensionsPackageStub: SinonStub;
@@ -61,9 +61,9 @@ describe("changeAdmin", () => {
 
     // Ensure that the request will be made to the correct package.
     sinon.assert.calledWithNew(aptosExtensionsPackageStub);
-    sinon.assert.calledWithExactly(
+    sinon.assert.calledWithMatch(
       aptosExtensionsPackageStub,
-      getAptosClient(rpcUrl),
+      matchAptosClient(rpcUrl),
       aptosExtensionsPackageId
     );
 

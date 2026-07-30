@@ -18,11 +18,31 @@
 
 import { strict as assert } from "assert";
 import { Ed25519Account, MultiKey, MultiKeyAccount } from "@aptos-labs/ts-sdk";
+import sinon from "sinon";
 import { generateKeypair } from "../../scripts/typescript/generateKeypair";
 import {
   checkSourceCodeExistence,
   PackageMetadata
 } from "../../scripts/typescript/utils";
+
+/**
+ * Creates a Sinon matcher for Aptos client instances.
+ * This matcher checks the client's configuration instead of doing a deep equality check,
+ * which is necessary because the Aptos client object structure may vary between SDK versions.
+ *
+ * @param rpcUrl - The expected RPC URL (will be appended with /v1 for fullnode check)
+ * @returns A Sinon matcher that can be used with sinon.assert.calledWithMatch
+ *
+ * @example
+ * sinon.assert.calledWithMatch(
+ *   stub,
+ *   matchAptosClient("http://localhost:8080"),
+ *   otherArgs...
+ * );
+ */
+export function matchAptosClient(rpcUrl: string) {
+  return sinon.match.has("config", sinon.match.has("fullnode", `${rpcUrl}/v1`));
+}
 
 export function validateSourceCodeExistence(
   pkgMetadata: PackageMetadata,
@@ -63,6 +83,6 @@ export async function generateKOfNMultiKeyAccount(
       publicKeys: keypairs.map((keypair) => keypair.publicKey),
       signaturesRequired: k
     }),
-    signers: keypairs
+    signers: keypairs.slice(0, k) // Only pass k signers, not all n
   });
 }

@@ -124,7 +124,7 @@ export function getEventByType(
 ): Event {
   const event = txOutput.events.find((e: any) => e.type === eventType);
   assert(!!event, `Event ${eventType} not found`);
-  return event;
+  return event!;
 }
 
 /**
