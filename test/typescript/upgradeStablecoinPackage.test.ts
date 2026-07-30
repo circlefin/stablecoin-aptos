@@ -22,7 +22,7 @@ import sinon, { SinonStub } from "sinon";
 import * as aptosExtensionsPackageModule from "../../scripts/typescript/packages/aptosExtensionsPackage";
 import { upgradeStablecoinPackage } from "../../scripts/typescript/upgradeStablecoinPackage";
 import * as publishPayloadModule from "../../scripts/typescript/utils/publishPayload";
-import { getAptosClient } from "../../scripts/typescript/utils";
+import { matchAptosClient } from "./testUtils";
 
 describe("Upgrade package", () => {
   let aptosExtensionsPackageStub: SinonStub;
@@ -75,9 +75,9 @@ describe("Upgrade package", () => {
     });
 
     sinon.assert.calledWithNew(aptosExtensionsPackageStub);
-    sinon.assert.calledWithExactly(
+    sinon.assert.calledWithMatch(
       aptosExtensionsPackageStub,
-      getAptosClient(rpcUrl),
+      matchAptosClient(rpcUrl),
       aptosExtensionsPackageId
     );
 

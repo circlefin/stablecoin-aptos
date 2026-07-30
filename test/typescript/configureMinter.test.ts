@@ -22,7 +22,7 @@ import sinon, { SinonStub } from "sinon";
 import { configureMinter } from "../../scripts/typescript/configureMinter";
 import * as aptosFrameworkPackageModule from "../../scripts/typescript/packages/aptosFrameworkPackage";
 import * as stablecoinPackageModule from "../../scripts/typescript/packages/stablecoinPackage";
-import { getAptosClient } from "../../scripts/typescript/utils";
+import { matchAptosClient } from "./testUtils";
 
 describe("configureMinter", () => {
   let aptosFrameworkPackageStub: SinonStub;
@@ -74,9 +74,9 @@ describe("configureMinter", () => {
     });
 
     sinon.assert.calledWithNew(stablecoinPackageStub);
-    sinon.assert.calledWithExactly(
+    sinon.assert.calledWithMatch(
       stablecoinPackageStub,
-      getAptosClient(rpcUrl),
+      matchAptosClient(rpcUrl),
       stablecoinPackageId
     );
 

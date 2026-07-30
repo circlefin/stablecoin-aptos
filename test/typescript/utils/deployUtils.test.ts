@@ -70,7 +70,15 @@ describe("Deploy utils", () => {
       seed
     ).toString();
 
-    assert.strictEqual(txOutput.events.length, 2); // PublishPackage and FeeStatement
+    // Expected events:
+    // 1. 0x1::code::PublishPackage - Package publication
+    // 2. 0x1::transaction_fee::FeeStatement - Transaction fees
+    // Note: aptos_extensions doesn't create a fungible asset, so only 2 events
+    assert.strictEqual(
+      txOutput.events.length,
+      2,
+      `Expected 2 events, got ${txOutput.events.length}`
+    );
     assert.strictEqual(packageId, expectedCodeAddress);
 
     const packageMetadata = await getPackageMetadata(
@@ -101,7 +109,15 @@ describe("Deploy utils", () => {
       seed
     ).toString();
 
-    assert.strictEqual(txOutput.events.length, 2); // PublishPackage and FeeStatement
+    // Expected events:
+    // 1. 0x1::code::PublishPackage - Package publication
+    // 2. 0x1::fungible_asset::Creation - Fungible asset creation (new in SDK v5)
+    // 3. 0x1::transaction_fee::FeeStatement - Transaction fees
+    assert.strictEqual(
+      txOutput.events.length,
+      3,
+      `Expected 3 events, got ${txOutput.events.length}`
+    );
     assert.strictEqual(packageId, expectedCodeAddress);
 
     const packageMetadata = await getPackageMetadata(

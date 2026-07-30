@@ -22,7 +22,7 @@ import sinon, { SinonStub } from "sinon";
 import { transferOwnership } from "../../scripts/typescript/transferOwnership";
 import * as aptosExtensionsPackageModule from "../../scripts/typescript/packages/aptosExtensionsPackage";
 import * as stablecoinPackageModule from "../../scripts/typescript/packages/stablecoinPackage";
-import { getAptosClient } from "../../scripts/typescript/utils";
+import { matchAptosClient } from "./testUtils";
 
 describe("transferOwnership", () => {
   let aptosExtensionsPackageStub: SinonStub;
@@ -74,9 +74,9 @@ describe("transferOwnership", () => {
 
     // Ensure that the request will be made to the correct package.
     sinon.assert.calledWithNew(aptosExtensionsPackageStub);
-    sinon.assert.calledWithExactly(
+    sinon.assert.calledWithMatch(
       aptosExtensionsPackageStub,
-      getAptosClient(rpcUrl),
+      matchAptosClient(rpcUrl),
       aptosExtensionsPackageId
     );
 

@@ -1,15 +1,15 @@
 #!/bin/bash
 #
 # Copyright 2024 Circle Internet Group, Inc. All rights reserved.
-# 
+#
 # SPDX-License-Identifier: Apache-2.0
-# 
+#
 # Licensed under the Apache License, Version 2.0 (the "License");
 # you may not use this file except in compliance with the License.
 # You may obtain a copy of the License at
-# 
+#
 #     http://www.apache.org/licenses/LICENSE-2.0
-# 
+#
 # Unless required by applicable law or agreed to in writing, software
 # distributed under the License is distributed on an "AS IS" BASIS,
 # WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
@@ -29,7 +29,7 @@ echo ">> Setting up environment"
 
 
 # ==== Aptos installation ====
-APTOS_CLI_VERSION="7.5.0"
+APTOS_CLI_VERSION="7.13.0"
 APTOS_BIN="${APTOS_BIN:-$HOME/.aptos/bin}"
 
 if ! command -v aptos &> /dev/null || ! aptos -V | grep -q "aptos $APTOS_CLI_VERSION"
